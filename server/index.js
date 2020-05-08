@@ -1,10 +1,11 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser')
 
 const port = process.env.PORT || 3000;
 
 const app = express();
-
+app.use(bodyParser.json());
 
 
 
@@ -17,6 +18,8 @@ app.get('/api/test', (req, res) => {
 
 app.post('/api/test', (req, res) => {
   // res.status(201).end(); //created
+  // console.log('getting port request')
+  console.log(req.body);
   res.status(404).end();
 
 });
