@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const {imageHandler} = require('./modules/imageGetter.js')
 
 const port = process.env.PORT || 3000;
 
@@ -19,7 +20,11 @@ app.get('/api/test', (req, res) => {
 app.post('/api/test', (req, res) => {
   // res.status(201).end(); //created
   // console.log('getting port request')
-  console.log(req.body);
+  let imageLocation = req.body.url;
+  imageHandler(imageLocation);
+
+
+
   res.status(404).end();
 
 });
