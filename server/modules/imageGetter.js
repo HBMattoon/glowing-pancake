@@ -25,7 +25,7 @@ const imageGetter = (uri, filename, cb) => {
 const promisedGetter = Promise.promisify(imageGetter);
 
 const imageHandler = (uri, cb) => {
-  promisedGetter(uri, 'temp.png')
+  promisedGetter(uri, './data/temp.png')
   .then(res => {
     console.log(res)
   })
