@@ -1,6 +1,7 @@
 const request = require('request');
 const fs = require('fs');
 const Promise = require('bluebird');
+const  {uploadImage} = require('./bucketHandler.js')
 
 const imageGetter = (uri, filename, cb) => {
   //request.head(uri, (err, res, body) => {
@@ -28,6 +29,7 @@ const imageHandler = (uri, cb) => {
   promisedGetter(uri, './data/temp.png')
   .then(res => {
     console.log(res)
+    uploadImage();
   })
   .catch(err => {
     console.log(err)
