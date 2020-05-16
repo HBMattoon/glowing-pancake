@@ -1,13 +1,12 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const {imageHandler} = require('./modules/imageGetter.js')
+const {promisedImageHandler} = require('./modules/imageGetter.js')
 
 const port = process.env.PORT || 3000;
 
 const app = express();
 app.use(bodyParser.json());
-
 
 
 app.use('/', express.static(path.join(__dirname, './../client/dist')));
@@ -17,15 +16,17 @@ app.get('/api/test', (req, res) => {
   res.status(404).end(); //not found
 });
 
-app.post('/api/test', (req, res) => {
-  // res.status(201).end(); //created
-  // console.log('getting port request')
+app.post('/api/image', (req, res) => {
   let imageLocation = req.body.url;
-  imageHandler(imageLocation);
-
-
-
-  res.status(404).end();
+  promisedImageHandler(imageLocation)
+  .then(data => {
+    //console.log('pass ', data)
+    res.status(201).end()
+  })
+  .catch(err => {
+    //console.log('fail', err)
+    res.status(404).end()
+  })
 
 });
 

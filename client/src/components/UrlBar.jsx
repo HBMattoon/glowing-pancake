@@ -1,6 +1,6 @@
 import React from 'react';
 
-let apiUrl = 'http://localhost:3000/api/test'
+let apiUrl = 'http://localhost:3000/api/image'
 
 class UrlBar extends React.Component {
   constructor(props){
@@ -16,18 +16,19 @@ class UrlBar extends React.Component {
   }
 
   submitUrl(url) {
-    let data = {'url': url };
-    data = JSON.stringify(data);
-    console.log(data)
+    const data = {'url': url };
+    const jsonData = JSON.stringify(data);
+    console.log(jsonData)
     fetch(apiUrl, {
       method:'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: data
+      body: jsonData
     })
     .then(res => res.json())
     .then(res => console.log(res))
+    .catch(err => console.log(err))
   }
 
   submitButtonAction(){
