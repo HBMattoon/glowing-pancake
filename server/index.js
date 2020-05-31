@@ -16,7 +16,7 @@ app.get('/api/image', (req, res) => {
   console.log('getting objects');
   promisedListObjects()
   .then(data => {
-    console.log('data is: ', data);
+    //console.log('data is: ', data);
     res.status(200).send(data); //ok
   })
   .catch(err => {

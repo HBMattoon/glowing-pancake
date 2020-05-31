@@ -49,7 +49,7 @@ class UrlBar extends React.Component {
 
   submitButtonAction(){
     let inputValue = document.getElementById('urlBarInput').value;
-    console.log(inputValue)
+    //console.log(inputValue)
     this.setState({'url':inputValue});
     this.submitUrl(inputValue);
   }

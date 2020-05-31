@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from './components/NavBar.jsx';
 import UrlBar from './components/UrlBar.jsx';
+import ImageDisplay from './components/ImageDisplay.jsx';
 
 class App extends React.Component {
   constructor(props){
@@ -33,6 +34,7 @@ class App extends React.Component {
       <div id="appBody">
         <NavBar />
         <UrlBar updateImages = {this.updateImages}/>
+        <ImageDisplay images = {this.state.images}/>
       </div>
     )
   }

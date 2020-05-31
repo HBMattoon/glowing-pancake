@@ -60,9 +60,11 @@ const listImageAdress = (cb) => {
 }
 
 const cleanData = (data) => {
+  //console.log(data)
   let result = {};
   result.images = data.Contents.map(item => {
-    return URIprefix + item.key
+    //console.log(item.Key)
+    return URIprefix + item.Key
   })
   return result;
 }
