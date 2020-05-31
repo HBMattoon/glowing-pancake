@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 const fs = require('fs');
 const path = require('path');
-const {myBucket} = require('./../../key.js');
+const {myBucket, URIprefix} = require('./../../key.js');
 const Promise = require('bluebird');
 
 
@@ -53,9 +53,18 @@ const listImageAdress = (cb) => {
     if (err){
       cb(err, null)
     } else {
+      data = cleanData(data);
       cb(null, data)
     }
   });
+}
+
+const cleanData = (data) => {
+  let result = {};
+  result.images = data.Contents.map(item => {
+    return URIprefix + item.key
+  })
+  return result;
 }
 
 const promisedListObjects = Promise.promisify(listImageAdress);

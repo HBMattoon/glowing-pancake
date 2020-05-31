@@ -18,7 +18,7 @@ class UrlBar extends React.Component {
   submitUrl(url) {
     const data = {'url': url };
     const jsonData = JSON.stringify(data);
-    console.log(jsonData)
+    //console.log(jsonData)
     fetch(apiUrl, {
       method:'POST',
       headers: {
@@ -27,8 +27,24 @@ class UrlBar extends React.Component {
       body: jsonData
     })
     .then(res => res.json())
-    .then(res => console.log(res))
+    .then(res => {
+      if(res.status === 201){
+        this.getUrls();
+      } else {
+        console.log(res.status)
+      }
+    })
     .catch(err => console.log(err))
+  }
+
+  getUrls() {
+    console.log('getting objects!')
+    fetch(apiUrl)
+    .then(res => res.json())
+    .then(res => {
+      this.props.updateImages(res)
+    })
+    .catch(err =>  console.log(err))
   }
 
   submitButtonAction(){
@@ -38,6 +54,8 @@ class UrlBar extends React.Component {
     this.submitUrl(inputValue);
   }
 
+
+
   render(){
     return(
       <div class = "urlBar">
@@ -45,7 +63,7 @@ class UrlBar extends React.Component {
         <input id='urlBarInput'></input>
 
         <button onClick = {() => this.submitButtonAction()}>submit</button>
-
+        <button onClick = {() => this.getUrls()}>Update images</button>
       </div>
 
     )

@@ -43,7 +43,8 @@ const imageHandler = (uri, cb) => {
 const promisedImageHandler = Promise.promisify(imageHandler);
 
 module.exports = {
-  promisedImageHandler
+  promisedImageHandler,
+
 }
 
 

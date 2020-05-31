@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const {promisedImageHandler} = require('./modules/imageGetter.js')
+const  { promisedListObjects } = require('./modules/bucketHandler.js')
 
 const port = process.env.PORT || 3000;
 
@@ -11,9 +12,17 @@ app.use(bodyParser.json());
 
 app.use('/', express.static(path.join(__dirname, './../client/dist')));
 
-app.get('/api/test', (req, res) => {
-  // res.status(200).send(data); //ok
+app.get('/api/image', (req, res) => {
+  console.log('getting objects');
+  promisedListObjects()
+  .then(data => {
+    console.log('data is: ', data);
+    res.status(200).send(data); //ok
+  })
+  .catch(err => {
+    console.log(err);
   res.status(404).end(); //not found
+  })
 });
 
 app.post('/api/image', (req, res) => {
