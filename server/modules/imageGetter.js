@@ -11,11 +11,14 @@ const imageGetter = (uri, filename, cb) => {
   .get(uri)
   .on('response', function(response) {
     //console.log(response.statusCode) // 200
-    //console.log(response.headers['content-type']) // 'image/png'
-    if(response.statusCode === 200 && response.headers['content-type'] === 'image/jpeg'){
+    console.log(response.headers['content-type']) // 'image/png'
+
+
+    if(response.statusCode === 200 && response.headers['content-type'] === ('image/jpeg' || 'image/png')){
       console.log('passes')
     } else {
       console.log('fails')
+      cb('datatype mismatch', null);
     }
   })
   .pipe(fs.createWriteStream(filename))

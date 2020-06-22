@@ -1,4 +1,5 @@
 import React from 'react';
+import ImageItem from './ImageItem.jsx';
 
 class ImageDisplay extends React.Component {
   constructor(props){
@@ -12,7 +13,7 @@ class ImageDisplay extends React.Component {
         <div>images below here:</div>
         <div>
           {this.props.images.map(image => {
-            return <img src={image}></img>
+            return <ImageItem uri={image} />
           })}
         </div>
       </div>
